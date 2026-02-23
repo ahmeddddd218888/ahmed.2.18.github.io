@@ -1,0 +1,209 @@
+<html>
+  <head>
+    <title> hi</title>
+  
+  <style>
+    body {
+      background:lightblue;
+      font-family:sans-serif;
+    }
+   #bossHealthBox, #playerHealthBox {
+      border: 2px solid white;
+      width: 250px;
+      margin: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      background:green;
+    }
+    #playerButtons button {
+      font-size: 18px;
+      margin: 10px;
+      padding: 10px 20px;
+      border-radius: 8px;
+     
+    }
+    #playerButtons {
+      margin-top: 20px;
+      background:red;
+    }
+     .buttonSpells:active {
+      margin-top: 20px;
+      background-color: #1d6fa5;
+    }
+    
+  </style>
+  
+
+</head>
+<body>
+  
+   <h1> Boss battle </h1>
+   <div id="playerButtons"> 
+  <button class="buttonSpells" onclick="iceSpell()">Ice Spell</button>
+  <button class="buttonSpells" onclick="fireSpell()">Fire Spell</button>
+  <button class="buttonSpells" onclick="iceSword()">Ice Sword</button>
+  <button class="buttonSpells" onclick="fireSword()">Fire Sword</button>  
+ </div>
+ 
+ 
+ 
+
+  <div id="bossHealthBox">Boss Health: </div>
+  <div id="playerHealthBox">Player Health: </div>
+
+  
+ 
+       
+    
+    
+    
+    
+ 
+    
+    
+    <script>
+    //ahmed tabal
+    
+    
+    function iceSpell() {
+  fight("ice spell"); 
+}
+
+function fireSpell() {
+  fight("fire spell"); 
+}
+
+function iceSword() {
+  fight("ice sword"); 
+}
+
+function fireSword() {
+  fight("fire sword"); 
+}
+
+    
+
+    let playerHealth = 50;
+    let bossHealth = randomHealth()
+    let iceWeakness = trueFalse()
+    let magicWeakness = trueFalse()
+    
+    
+    function randomHealth() {
+      let healthNumber= Math.random()* 20
+      healthNumber+= 30
+      healthNumber= Math.floor(healthNumber);
+      return healthNumber;
+      
+    }
+     
+     function trueFalse() {
+       let trueOrFalse=Math.random();
+       if (trueOrFalse<.5) {
+          return true; 
+         
+       }
+       else{
+         
+       
+       return false; }
+       
+     } 
+  
+  
+    function diceRoll() {
+      return Math.floor(Math.random()*6)+1
+    } 
+       
+     
+    function hitBoss(weapon) {
+      let damage = 0 
+      damage += diceRoll();
+      
+      if (iceWeakness== true && weapon.includes("ice")) {
+      damage += diceRoll();
+    }
+    if (iceWeakness==false && weapon.includes("fire")) {
+      damage += diceRoll();
+      
+    }
+    
+    if (magicWeakness== true && weapon.includes("spell")) {
+      damage += diceRoll();
+    }
+   
+   if (magicWeakness == false && weapon.includes("sword")) {
+     damage += diceRoll();
+   }
+   
+   alert("you hit the boss with" +" "+ weapon + " " +"for" + " " + damage + " " +"damage!");
+  return damage;
+    }
+    
+    function hitPlayer() {
+      const enemyAttacks = ["Sneak Attack", "Tail Whip", "Fire Breath", "Roundhouse Kick",
+      "Punchy Punch", "Jump Scare", "Claw Swipe"];
+      
+      
+      const attack = enemyAttacks[Math.floor(Math.random()*enemyAttacks.length)];
+      alert("dragon uses his" + " "+ attack + " "+  "!")
+      
+      let damage = diceRoll();
+      if (playerHealth > 25) {
+        damage += diceRoll() }
+        alert("dragon has done"  +" " + damage + " " +"damage to you");
+        return damage;
+      
+    }
+    
+    function checkForWins() {
+      if (playerHealth<= 0) {
+        alert("You got cooked by the dragon, he wins");
+        document.body.style.background = "rgb(255,0,0)"
+        document.getElementById("playerButtons").style.display = "none";
+        
+      }
+      else if (bossHealth <=0) {
+        alert("you slayed the dragon good job");
+        document.body.style.background = "rgb(0,255,0)"
+      
+       document.getElementById("playerButtons").style.display= "none";
+      }
+      
+      sho
+    }
+   
+     function fight (weapon) {
+       let damage = hitBoss(weapon);
+       bossHealth -= damage;
+       document.getElementById("bossHealthBox").innerHTML= "Boss Health: " + bossHealth;
+       
+       
+       if (bossHealth > 0) {
+    damage = hitPlayer();
+    playerHealth -= damage;
+    document.getElementById("playerHealthBox").innerHTML = "Player Health: " + playerHealth;
+  }
+
+  checkForWins();
+}
+     
+     
+       
+
+ 
+   
+    
+      
+    
+      
+      
+    </script>
+    
+    
+    
+    
+    </body>
+    </html>
+    
+    
